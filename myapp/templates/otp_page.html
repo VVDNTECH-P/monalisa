@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .test {
+  border: 1px solid #eee;
+}
+#main {
+}
+.loginbox {
+  max-width: 300px;
+  min-height: 347px;
+  height: auto;
+  margin: 0px auto;
+  background: #22222a;
+  border-radius: 6px;
+  margin-top: 10%;
+}
+.container {
+  margin: 0 auto;
+}
+input[type="text"],
+input[type="password"],
+input[type="submit"] {
+  margin: 0 auto;
+  width: 80%;
+  display: block;
+  height: 46px;
+  border: none;
+}
+
+input[type="text"] {
+  border-bottom: 1px solid #cccccc;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+  padding-left: 15px;
+}
+input[type="password"] {
+  margin-bottom: 10px;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  padding-left: 15px;
+}
+input[type="submit"] {
+  background-color: #ff009a;
+  border-radius: 3px;
+  color: white;
+}
+
+.m0p0 {
+  margin: 0px;
+  padding: 0px;
+}
+* {
+  margin: 0px;
+  padding: 0px;
+}
+.logo {
+  width: 96px;
+  height: 96px;
+  background: #c95050;
+  margin: 20px auto 20px auto;
+}
+
+.forgotpw {
+  display: block;
+  text-align: center;
+  color: #666;
+  margin-top: 2%;
+  cursor: pointer;
+}
+
+.errormessage {
+  color: white;
+  display: block;
+  display: none;
+  text-align: center;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+/*
+::-webkit-input-placeholder {  padding-left:3%;}
+::-moz-placeholder { padding-left:3%; }  
+:-ms-input-placeholder { padding-left:3%; } 
+input:-moz-placeholder { padding-left:3%; }  */
+
+.alarm {
+  border: 3px solid #ec81b9 !important;
+  background-color: #f9daea;
+}
+.error {
+  background-color: #f9daea;
+}
+
+.instruction {
+  display: block;
+  text-align: center;
+  color: #eee;
+  margin-top: 4%;
+  cursor: pointer;
+  font-size: 15px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+    </style>
+</head>
+
+
+<body>
+    <!-- OTP Page -->
+
+    <br>
+    <br>
+<div class="container mt-5">
+    <div class="row m0p0">
+        <div id="main" class="test1 m0p0">
+            <div class="row m0p0">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m0p0">
+                    <div class="test loginbox ">
+                        <div class="row m0p0">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 m0p0"></div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 m0p0">
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 m0p0"></div>
+                        </div>
+                        <div class="row m0p0">
+                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m0p0">
+                               <div class="instruction" style="">
+                                 <h3>One-Time-Password(OTP)</h3>
+                               </div></div>
+                          <br><br>
+                               <form action="" method="POST">{% csrf_token%}
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m0p0">
+                                <input type="password" name="password" placeholder="OTP" />
+                            </div>
+                          
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m0p0">
+                            <div class="errormessage">Please enter a valid email / password</div>
+                          </div>
+                          
+                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m0p0">
+                                <input type="submit" name="submit" value="SUBMIT" />
+                            </div> 
+                        </form>
+                          <br><br>
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                            <div class="instruction" style="">Please provide the code that you have received from pk
+                            </div>
+                            
+                            </div> 
+                          
+                        </div>
+          
+</body>
+
+
+<script>
+    var submitflag=true;
+$('input[type=submit]').click(function(){
+  
+    submitflag=true;
+    checknullinput();  
+   // var useremail = $('input[type=text][name=email]').val();   
+   // if(useremail!=''){
+      // validateEmail(useremail);
+  //  }
+
+
+function validateEmail(email) {
+  var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+  if( !emailReg.test( email ) ) {
+    $('.errormessage').css("display","block");
+    $('input[type=text][name=email]').addClass('alarm');submitflag=false;
+    return false;
+  } else {
+    $('.errormessage').css("display","none");
+    $('input[type=text][name=email]').removeClass('alarm');
+    return true;
+  }
+}
+  
+  function checknullinput(){
+    
+   // var useremail= $('input[type=text][name=email]')
+    var password = $('input[type=password][name=password]');
+    password.removeClass("error");//useremail.removeClass("error");
+       if(password.val()==''){  password.focus(); password.addClass("error"); submitflag=false; }    
+     //  if(useremail.val()==''){ useremail.focus(); useremail.addClass("error"); submitflag=false; } 
+           
+  }
+  
+  if(submitflag==false){
+     return false; 
+  }else{
+    alert("submit succesful, thank you!"); 
+  }
+  
+  });
+</script>
+</html>

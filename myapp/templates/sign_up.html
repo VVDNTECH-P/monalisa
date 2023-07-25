@@ -1,0 +1,78 @@
+{% extends 'base.html' %}{% load static %}{% block contain %}
+
+
+<style>
+    #log {
+        border: 1px solid white;
+        padding: 60px 40px;
+        margin-top: 30px;
+        -webkit-box-shadow: -6px -16px 83px 26px rgba(0, 0, 0, 0.73);
+        -moz-box-shadow: -6px -16px 83px 26px rgba(0, 0, 0, 0.73);
+        box-shadow: -6px -16px 83px 26px rgba(0, 0, 0, 0.73);
+        border-radius: 74px 0px 101px 0px;
+        -moz-border-radius: 74px 0px 101px 0px;
+        -webkit-border-radius: 74px 0px 101px 0px;
+        border: 16px solid #50bfc7;
+    }
+    
+    img {
+        width: 150px;
+        border-radius: 50%;
+        margin-left: 85px;
+    }
+    
+    h1 {
+        color: rgb(90, 88, 88);
+        text-align: center;
+        font-weight: bolder;
+        margin-top: -40px;
+    }
+</style>
+
+{% include 'navbar.html' %}
+<div class="container">
+    <div class="col-sm-12 col-md-12 col-xs-12">
+        {% if messages %} {% for message in messages %}
+        <p {% if message.tags %} class="alert alert-{{message.tags}} mb-5 " {% endif %}>{{message}}&emsp;&emsp;<i class="bi bi-hand-thumbs-up"></i></p>
+        {% endfor %} {% endif %}
+    </div>
+</div>
+
+
+
+
+<div class="container-fluid bgs">
+    <div class="row">
+        <div class="col-sm-4 col-md-4 col-xs-12"></div>
+        <div class="col-sm-4 col-md-4 col-xs-12">
+            <form action="" method="POST" class="form-group" id="log" enctype="multipart/form-data" novalidate>{% csrf_token %}
+
+
+                <h1>Signup page</h1>
+                <img class="img-responsive img-circle" src="{% static 'image/abc.gif' %}" alt=""><br><br>
+
+                <div class="form-group">
+                    {% for fm in form %} {{fm.label_tag}} {{fm}} <small class="text-danger"> {{fm.errors|striptags}}</small><br> {% endfor %}
+                </div>
+
+                <div class="text-center">
+                    <input type="submit" value="Submit" class="btn btn-info mt-5">
+                </div>
+                {% if form.non_field_errors %} {% for new in form.non_field_errors %}
+                <p class='text-danger'>{{new}}</p>
+                {% endfor %} {% endif %}
+
+
+            </form>
+        </div>
+
+
+    </div>
+</div>
+
+
+
+
+
+
+{% endblock contain %}
