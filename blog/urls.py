@@ -18,6 +18,8 @@ from django.urls import path
 from myapp import views
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.static import serve
+from django.conf.urls import url
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home_page.as_view() , name = 'home'),
@@ -32,11 +34,12 @@ urlpatterns = [
     path('logout/', views.user_logout.as_view() , name = 'logout'),
     path('information/', views.Information_view.as_view(),name='information'),
     path('delete_information/<int:id>/', views.Delete_information,name='delete_information'),
-    path('otp_page/', views.Otp_page.as_view(),name = 'otp_page')
+    path('otp_page/', views.Otp_page.as_view(),name = 'otp_page'),
 
 
 
-
+    url(r'^media/(?P<path>.*)$', serve,{'document_root':       settings.MEDIA_ROOT}), 
+    url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}), 
 
 
 
